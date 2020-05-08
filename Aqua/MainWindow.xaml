@@ -1,0 +1,243 @@
+﻿<Controls:MetroWindow x:Class="Aqua.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Aqua"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:h="clr-namespace:Aqua.Helper"
+        xmlns:uc="clr-namespace:Aqua.Controls"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
+        TitlebarHeight="33" Title="TyroTools-Aqua" Icon="/Asserts/Logo.png"
+        Height="780" Width="720" ResizeMode="CanResizeWithGrip">
+
+    <!--标题栏标题设置-->
+    <Controls:MetroWindow.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Text="{TemplateBinding Content}" TextTrimming="CharacterEllipsis"
+                   VerticalAlignment="Center" Margin="8 0 8 0"
+                   FontWeight="Light" FontSize="20" FontFamily="Microsoft YaHei" />
+        </DataTemplate>
+    </Controls:MetroWindow.TitleTemplate>
+
+    <!--标题栏程序图标设置-->
+    <Controls:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <Image Source="{TemplateBinding Content}" Width="30" Height="30" Stretch="Uniform"/>
+        </DataTemplate>
+    </Controls:MetroWindow.IconTemplate>
+
+    <!--标题栏右侧按钮设置-->
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Controls:ToggleSwitch x:Name="btnTheme" OnLabel="暗黑" OffLabel="明亮" Foreground="White"
+                                   OffSwitchBrush="LightGray" OnSwitchBrush="White" ThumbIndicatorBrush="WhiteSmoke"
+                                   IsCheckedChanged="btnTheme_IsCheckedChanged"/>
+            <Button x:Name="btnDonate" Content="&#xe7ee;" FontFamily="Asserts/Fonts/#iconfont" FontSize="20"
+                    Click="btnDonate_Click" ToolTip="打赏"/>
+            <Button x:Name="btnAbout" Content="&#xe605;" FontFamily="Asserts/Fonts/#iconfont" FontSize="20"
+                    Click="btnAbout_Click" ToolTip="关于"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Window.Resources>
+        <h:DoubleToString x:Key="myConverter"/>
+    </Window.Resources>
+
+    <StackPanel>
+        <StackPanel x:Name="Print_Area" Margin="10">
+            <GroupBox Margin="0,5">
+                <GroupBox.Header>
+                    <TextBlock Text="输入参数" Foreground="White" FontSize="14"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Margin="5,0" VerticalAlignment="Center"
+                            ItemsSource="{Binding InputPropList1}" SelectedItem="{Binding InputProp1}" DisplayMemberPath="NameCN">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <mvvm:EventToCommand Command="{Binding Input1SelectCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                        <TextBox  Grid.Column="1" Margin="5,0" VerticalContentAlignment="Center"
+                                  Text="{Binding InputValue1,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"/>
+                        <TextBlock Grid.Column="2" Margin="5,0"
+                                   Text="{Binding InputProp1.Unit}" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="1" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Margin="5,0" VerticalAlignment="Center"
+                            ItemsSource="{Binding InputPropList2}" SelectedItem="{Binding InputProp2}" DisplayMemberPath="NameCN">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <mvvm:EventToCommand Command="{Binding Input2SelectCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                        <TextBox x:Name="txtInputValue2" Grid.Column="1" Margin="5,0" VerticalContentAlignment="Center"
+                                 Text="{Binding InputValue2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                        <TextBlock Grid.Column="2" Margin="5,0"
+                                   Text="{Binding InputProp2.Unit}" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Margin="0,10" DataContext="{Binding MyWater}">
+                <GroupBox.Header>
+                    <TextBlock Text="物性结果" Foreground="White" FontSize="14"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <uc:MyDataBox Grid.Row="0" Grid.Column="0" Margin="10,5"
+                                  DataName="压力" DataUnit="MPa(a)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Pressure], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="0" Grid.Column="1" Margin="10,5"
+                                  DataName="温度" DataUnit="°C" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Temperature], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="1" Grid.Column="0" Margin="10,5"
+                                  DataName="密度" DataUnit="kg/m³" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Density], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="1" Grid.Column="1" Margin="10,5"
+                                  DataName="比容" DataUnit="m³/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[SpecificVolume], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="2" Grid.Column="0" Margin="10,5"
+                                  DataName="焓" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Enthalpy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="2" Grid.Column="1" Margin="10,5"
+                                  DataName="熵" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Entropy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="3" Grid.Column="0" Margin="10,5"
+                                  DataName="㶲" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Exergy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="3" Grid.Column="1" Margin="10,5"
+                                  DataName="内能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[InternalEnergy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="4" Grid.Column="0" Margin="10,5"
+                                  DataName="定压比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[IsobaricHeatCapacity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="4" Grid.Column="1" Margin="10,5"
+                                  DataName="定容比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[IsochoricHeatCapacity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="5" Grid.Column="0" Margin="10,5"
+                                  DataName="声速" DataUnit="m/s" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Sound], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="5" Grid.Column="1" Margin="10,5"
+                                  DataName="定熵指数" DataUnit="" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[IsentropicExponent], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="6" Grid.Column="0" Margin="10,5"
+                                  DataName="亥姆霍兹自由能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Helmholtz], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="6" Grid.Column="1" Margin="10,5"
+                                  DataName="吉布斯自由能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Gibbs], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="7" Grid.Column="0" Margin="10,5"
+                                  DataName="压缩因子" DataUnit="" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[CompressibilityFactor], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="7" Grid.Column="1" Margin="10,5"
+                                  DataName="气相分率" DataUnit="" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[VaporFraction], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="8" Grid.Column="0" Margin="10,5"
+                                  DataName="区域" DataUnit="" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Region]}"/>
+                    <uc:MyDataBox Grid.Row="8" Grid.Column="1" Margin="10,5"
+                                  DataName="定压热膨胀系数" DataUnit="1/K" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[ExpansionCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="9" Grid.Column="0" Margin="10,5"
+                                  DataName="等温压缩率" DataUnit="1/MPa" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[IsothermalCompressibility], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="9" Grid.Column="1" Margin="10,5"
+                                  DataName="偏导数(dV/dT)p" DataUnit="m³/(kg·K)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[dVdT], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="10" Grid.Column="0" Margin="10,5"
+                                  DataName="偏导数(dV/dP)T" DataUnit="m³/(kg·MPa)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[dVdP], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="10" Grid.Column="1" Margin="10,5"
+                                  DataName="偏导数(dP/dT)v" DataUnit="MPa/K" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[dPdT], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="11" Grid.Column="0" Margin="10,5"
+                                  DataName="等温Joule-Thomson系数" DataUnit="kJ/(kg·MPa)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[IsothermalJ_TCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="11" Grid.Column="1" Margin="10,5"
+                                  DataName="Joule-Thomson系数" DataUnit="K/MPa" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[J_TCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="12" Grid.Column="0" Margin="10,5"
+                                  DataName="动力粘度" DataUnit="Pa·s" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[DynamicViscosity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="12" Grid.Column="1" Margin="10,5"
+                                  DataName="运动粘度" DataUnit="m²/s" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[KinematicViscosity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="13" Grid.Column="0" Margin="10,5"
+                                  DataName="导热系数" DataUnit="W/(m·K)" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[ThermalConductivity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="13" Grid.Column="1" Margin="10,5"
+                                  DataName="热扩散系数" DataUnit="μm²/s" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[ThermalDiffusivity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="14" Grid.Column="0" Margin="10,5"
+                                  DataName="普朗特数" DataUnit="" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[Prandtl], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                    <uc:MyDataBox Grid.Row="14" Grid.Column="1" Margin="10,5"
+                                  DataName="表面张力" DataUnit="mN/m" IsDataEnabled="False"
+                                  DataValue="{Binding PropDic[SurfaceTension], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+        <Button x:Name="btnPrint" Content="打印" Width="100" Click="btnPrint_Click"/>
+    </StackPanel>
+
+</Controls:MetroWindow>

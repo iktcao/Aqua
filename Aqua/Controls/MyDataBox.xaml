@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Aqua.Controls.MyDataBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aqua.Controls"
+             xmlns:helper="clr-namespace:Aqua.Helper"
+             mc:Ignorable="d"
+             x:Name="parent"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="ErrorTemplate">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Left">
+                    <AdornedElementPlaceholder Name="adornedElement" />
+                    <Border BorderBrush="Red" BorderThickness="1"/>
+                </Grid>
+            </ControlTemplate>
+            <helper:NumericRule x:Key="IsNumeric"/>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>-->
+        </ResourceDictionary>        
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Center"
+                 DataContext="{Binding ElementName=parent}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition Width="0.6*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Column="0" StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="Uniform">
+            <TextBlock Margin="5,0" FontSize="{Binding DataFontSize}"
+                    Text="{Binding DataName}" VerticalAlignment="Center"/>
+        </Viewbox>
+
+        <TextBox x:Name="txtValue" Grid.Column="1" Margin="5,0" VerticalContentAlignment="Center"
+                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}" IsEnabled="{Binding IsDataEnabled}">
+            <TextBox.Text>
+                <Binding Path="DataValue" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                    <Binding.ValidationRules>
+                        <helper:NumericRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="2" Margin="5,0" VerticalAlignment="Center"
+                    Text="{Binding DataUnit}"/>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,95 @@
+﻿<Dialog:CustomDialog x:Class="Aqua.Views.AboutDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aqua.Views"
+             xmlns:model="clr-namespace:Aqua.Models"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             mc:Ignorable="d"
+             Title="关于" DialogTitleFontSize="24"
+             d:DesignHeight="500" d:DesignWidth="800">
+
+    <Dialog:CustomDialog.Resources>
+        <DataTemplate x:Key="MyTemplate" DataType="{x:Type model:SupportInfo}">
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Image Source="{Binding Logo}" Width="30" Height="30" Stretch="UniformToFill"/>
+                <TextBlock Margin="10,0,0,5" VerticalAlignment="Center" TextWrapping="WrapWithOverflow">
+                        <Hyperlink NavigateUri="{Binding Url}" Name="linkHelp" ToolTip="前往项目网站" RequestNavigate="OpenLink_RequestNavigate">
+                            <Hyperlink.Inlines>
+                                <Run Text="{Binding Name}"/>
+                            </Hyperlink.Inlines>
+                        </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Dialog:CustomDialog.Resources>
+
+    <StackPanel>
+        <Grid Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.RowSpan="2" Width="60" Height="60" Margin="10,0" VerticalAlignment="Center"
+                    Source="/Asserts/Logo.png"/>
+            <TextBlock Text="{Binding AppName}" FontSize="22" Margin="10,10,10,-5" VerticalAlignment="Center" Grid.Column="1"/>
+            <TextBlock Text="{Binding AppVersion}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding AppCopyright}" Margin="10,0,5,10" HorizontalAlignment="Right"/>
+            <TextBlock Margin="0,0,10,10" HorizontalAlignment="Right">
+                <Hyperlink NavigateUri="https://iktcao.github.io/apps/aqua/" RequestNavigate="OpenLink_RequestNavigate">iktcao.github.io</Hyperlink>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="0,10,0,5">
+            <StackPanel>
+                <TextBlock Text="参考文献:" Margin="10,5"/>
+                <Border Height="80" Margin="10,0,10,10" BorderBrush="LightGray" BorderThickness="1">
+                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <TextBlock TextWrapping="Wrap" Margin="5"
+                               Text="本程序使用了东南大学程懋华教授开发的水和水蒸汽性质IAPWS-IF97共享计算软件包SEUIF97;"/>
+                        <TextBlock TextWrapping="Wrap" Margin="5,0,5,5"
+                               Text="芮嘉敏,孙振业,程懋华. 基于最短加法链状态空间树的IAPWS-IF97快速计算方法[J]. 汽轮机技术,2017,59(4):245-247;"/>
+                        <TextBlock TextWrapping="Wrap" Margin="5,0,5,5"
+                               Text="王培红,贾俊颖,程懋华. 水和水蒸汽热力性质IAPWS-IF97公式的通用计算模型[J]. 动力工程,2001,21(6)：1564-1567;"/>
+                    </ListBox>                    
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="第三方支持:" Margin="10,5"/>
+                <ListBox ItemsSource="{Binding SupportInfos}" ItemTemplate="{StaticResource MyTemplate}"
+                      BorderBrush="LightGray" BorderThickness="1" Height="80" Margin="10,0,10,10"/>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Text="免责声明：使用本程序造成的一切后果与作者无关。" TextWrapping="Wrap" Margin="10,0"/>
+
+        <StackPanel>
+            <TextBlock Text="—— 联系作者 ——" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <Button x:Name="btnBlog" Content="&#xe602;" FontFamily="/Asserts/Fonts/#iconfont" FontSize="20"
+                Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"
+                BorderThickness="2" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}"
+                Click="btnBlog_Click"/>
+                <Button x:Name="btnEmail" Content="&#xe639;" FontFamily="/Asserts/Fonts/#iconfont" FontSize="20"
+                Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"
+                BorderThickness="2" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}"
+                Click="btnEmail_Click"/>
+                <Button x:Name="btnGithub" Content="&#xea0a;" FontFamily="/Asserts/Fonts/#iconfont" FontSize="20"
+                Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"
+                BorderThickness="2" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}"
+                Click="btnGithub_Click"/>
+            </StackPanel>
+            <Button x:Name="btnClose" Content="确定" Width="100" FontWeight="Normal" Margin="0,15,0,10"
+                    Click="btnClose_Click" Style="{StaticResource AccentedSquareButtonStyle}"/>
+        </StackPanel>
+    </StackPanel>
+</Dialog:CustomDialog>
