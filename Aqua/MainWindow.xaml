@@ -14,7 +14,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
         TitlebarHeight="33" Title="TyroTools-Aqua" Icon="/Asserts/Logo.png"
-        Height="780" Width="720" ResizeMode="CanResizeWithGrip">
+        Height="820" Width="720" ResizeMode="CanResizeWithGrip">
 
     <!--标题栏标题设置-->
     <Controls:MetroWindow.TitleTemplate>
@@ -128,112 +128,117 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <uc:MyDataBox Grid.Row="0" Grid.Column="0" Margin="10,5"
-                                  DataName="压力" DataUnit="MPa(a)" IsDataEnabled="False"
+                                  DataName="压力" DataUnit="MPa(a)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Pressure], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="0" Grid.Column="1" Margin="10,5"
-                                  DataName="温度" DataUnit="°C" IsDataEnabled="False"
+                                  DataName="温度" DataUnit="°C" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Temperature], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="1" Grid.Column="0" Margin="10,5"
-                                  DataName="密度" DataUnit="kg/m³" IsDataEnabled="False"
+                                  DataName="密度" DataUnit="kg/m³" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Density], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="1" Grid.Column="1" Margin="10,5"
-                                  DataName="比容" DataUnit="m³/kg" IsDataEnabled="False"
+                                  DataName="比容" DataUnit="m³/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[SpecificVolume], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="2" Grid.Column="0" Margin="10,5"
-                                  DataName="焓" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataName="焓" DataUnit="kJ/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Enthalpy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="2" Grid.Column="1" Margin="10,5"
-                                  DataName="熵" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataName="熵" DataUnit="kJ/(kg·K)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Entropy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="3" Grid.Column="0" Margin="10,5"
-                                  DataName="㶲" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataName="㶲" DataUnit="kJ/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Exergy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="3" Grid.Column="1" Margin="10,5"
-                                  DataName="内能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataName="内能" DataUnit="kJ/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[InternalEnergy], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="4" Grid.Column="0" Margin="10,5"
-                                  DataName="定压比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataName="定压比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[IsobaricHeatCapacity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="4" Grid.Column="1" Margin="10,5"
-                                  DataName="定容比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="False"
+                                  DataName="定容比热容" DataUnit="kJ/(kg·K)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[IsochoricHeatCapacity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="5" Grid.Column="0" Margin="10,5"
-                                  DataName="声速" DataUnit="m/s" IsDataEnabled="False"
-                                  DataValue="{Binding PropDic[Sound], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+                                  DataName="绝热指数" DataUnit="" IsDataEnabled="True"
+                                  DataValue="{Binding PropDic[AdiabaticExponent], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="5" Grid.Column="1" Margin="10,5"
-                                  DataName="定熵指数" DataUnit="" IsDataEnabled="False"
+                                  DataName="等熵指数" DataUnit="" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[IsentropicExponent], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="6" Grid.Column="0" Margin="10,5"
-                                  DataName="亥姆霍兹自由能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataName="亥姆霍兹自由能" DataUnit="kJ/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Helmholtz], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="6" Grid.Column="1" Margin="10,5"
-                                  DataName="吉布斯自由能" DataUnit="kJ/kg" IsDataEnabled="False"
+                                  DataName="吉布斯自由能" DataUnit="kJ/kg" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Gibbs], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="7" Grid.Column="0" Margin="10,5"
-                                  DataName="压缩因子" DataUnit="" IsDataEnabled="False"
+                                  DataName="压缩因子" DataUnit="" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[CompressibilityFactor], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="7" Grid.Column="1" Margin="10,5"
-                                  DataName="气相分率" DataUnit="" IsDataEnabled="False"
+                                  DataName="气相分率" DataUnit="" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[VaporFraction], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="8" Grid.Column="0" Margin="10,5"
-                                  DataName="区域" DataUnit="" IsDataEnabled="False"
+                                  DataName="区域" DataUnit="" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Region]}"/>
                     <uc:MyDataBox Grid.Row="8" Grid.Column="1" Margin="10,5"
-                                  DataName="定压热膨胀系数" DataUnit="1/K" IsDataEnabled="False"
+                                  DataName="定压热膨胀系数" DataUnit="1/K" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[ExpansionCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="9" Grid.Column="0" Margin="10,5"
-                                  DataName="等温压缩率" DataUnit="1/MPa" IsDataEnabled="False"
+                                  DataName="等温压缩率" DataUnit="1/MPa" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[IsothermalCompressibility], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="9" Grid.Column="1" Margin="10,5"
-                                  DataName="偏导数(dV/dT)p" DataUnit="m³/(kg·K)" IsDataEnabled="False"
+                                  DataName="偏导数(dV/dT)p" DataUnit="m³/(kg·K)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[dVdT], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="10" Grid.Column="0" Margin="10,5"
-                                  DataName="偏导数(dV/dP)T" DataUnit="m³/(kg·MPa)" IsDataEnabled="False"
+                                  DataName="偏导数(dV/dP)T" DataUnit="m³/(kg·MPa)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[dVdP], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="10" Grid.Column="1" Margin="10,5"
-                                  DataName="偏导数(dP/dT)v" DataUnit="MPa/K" IsDataEnabled="False"
+                                  DataName="偏导数(dP/dT)v" DataUnit="MPa/K" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[dPdT], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="11" Grid.Column="0" Margin="10,5"
-                                  DataName="等温Joule-Thomson系数" DataUnit="kJ/(kg·MPa)" IsDataEnabled="False"
+                                  DataName="等温Joule-Thomson系数" DataUnit="kJ/(kg·MPa)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[IsothermalJ_TCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="11" Grid.Column="1" Margin="10,5"
-                                  DataName="Joule-Thomson系数" DataUnit="K/MPa" IsDataEnabled="False"
+                                  DataName="Joule-Thomson系数" DataUnit="K/MPa" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[J_TCoefficient], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="12" Grid.Column="0" Margin="10,5"
-                                  DataName="动力粘度" DataUnit="Pa·s" IsDataEnabled="False"
+                                  DataName="动力粘度" DataUnit="mPa·s" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[DynamicViscosity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="12" Grid.Column="1" Margin="10,5"
-                                  DataName="运动粘度" DataUnit="m²/s" IsDataEnabled="False"
+                                  DataName="运动粘度" DataUnit="mm²/s" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[KinematicViscosity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="13" Grid.Column="0" Margin="10,5"
-                                  DataName="导热系数" DataUnit="W/(m·K)" IsDataEnabled="False"
+                                  DataName="导热系数" DataUnit="W/(m·K)" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[ThermalConductivity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="13" Grid.Column="1" Margin="10,5"
-                                  DataName="热扩散系数" DataUnit="μm²/s" IsDataEnabled="False"
+                                  DataName="热扩散系数" DataUnit="μm²/s" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[ThermalDiffusivity], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
 
                     <uc:MyDataBox Grid.Row="14" Grid.Column="0" Margin="10,5"
-                                  DataName="普朗特数" DataUnit="" IsDataEnabled="False"
+                                  DataName="普朗特数" DataUnit="" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[Prandtl], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                     <uc:MyDataBox Grid.Row="14" Grid.Column="1" Margin="10,5"
-                                  DataName="表面张力" DataUnit="mN/m" IsDataEnabled="False"
+                                  DataName="表面张力" DataUnit="mN/m" IsDataEnabled="True"
                                   DataValue="{Binding PropDic[SurfaceTension], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
+
+                    <uc:MyDataBox Grid.Row="15" Grid.Column="0" Margin="10,5"
+                                  DataName="声速" DataUnit="m/s" IsDataEnabled="True"
+                                  DataValue="{Binding PropDic[Sound], StringFormat={}{0:G6}, Converter={StaticResource myConverter}}"/>
                 </Grid>
             </GroupBox>
         </StackPanel>

@@ -44,7 +44,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{Binding AppCopyright}" Margin="10,0,5,10" HorizontalAlignment="Right"/>
             <TextBlock Margin="0,0,10,10" HorizontalAlignment="Right">
-                <Hyperlink NavigateUri="https://iktcao.github.io/apps/aqua/" RequestNavigate="OpenLink_RequestNavigate">iktcao.github.io</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/iktcao" RequestNavigate="OpenLink_RequestNavigate">iktcao@github</Hyperlink>
             </TextBlock>
         </StackPanel>
 

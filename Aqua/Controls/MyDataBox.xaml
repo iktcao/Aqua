@@ -40,7 +40,8 @@
         </Viewbox>
 
         <TextBox x:Name="txtValue" Grid.Column="1" Margin="5,0" VerticalContentAlignment="Center"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}" IsEnabled="{Binding IsDataEnabled}">
+                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}" IsEnabled="{Binding IsDataEnabled}"
+                 MouseDoubleClick="txtValue_MouseDoubleClick" IsReadOnly="True">
             <TextBox.Text>
                 <Binding Path="DataValue" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>

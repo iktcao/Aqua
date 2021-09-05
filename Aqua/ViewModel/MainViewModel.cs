@@ -199,8 +199,8 @@ namespace Aqua.ViewModel
             _inputPropList1.Add(_inputPropList[4]);
 
             _inputPropList2 = new ObservableCollection<PropInfo>();
-            _inputPropList2.Add(_inputPropList[1]);
             _inputPropList2.Add(_inputPropList[2]);
+            _inputPropList2.Add(_inputPropList[1]);
             _inputPropList2.Add(_inputPropList[3]);
             _inputPropList2.Add(_inputPropList[4]);
             _inputPropList2.Add(_inputPropList[5]);

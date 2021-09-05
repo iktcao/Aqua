@@ -7,13 +7,13 @@ namespace Aqua.Models
 {
     public class Water : ObservableObject
     {
-        // 水的属性数量
+        // 水的属性数量（不包含自定义属性）
         private const int n = 30;
 
         public Water()
         {
             _propDic = new Dictionary<string, string>();
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n + 1; i++)
             {
                 string key = Enum.GetName(typeof(AquaProps), i);
                 string value = "";
@@ -48,7 +48,7 @@ namespace Aqua.Models
 
             if (string.IsNullOrEmpty(inputProp1.Value) || string.IsNullOrEmpty(inputProp2.Value))
             {
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < n+1; i++)
                 {
                     string key = Enum.GetName(typeof(AquaProps), i);
                     this.PropDic[key] = "";
@@ -102,11 +102,34 @@ namespace Aqua.Models
 
                     if (dblValue == -1)
                         strvalue = "N/A";
+                    // 动力粘度的单位换算为cP
+                    else if (i == 24)
+                    {
+                        strvalue = (dblValue * 1000).ToString();
+                    }
+                    // 运动粘度的单位换算为cSt
+                    else if (i == 25)
+                    {
+                        strvalue = (dblValue * 1000000).ToString();
+                    }
                     else
                         strvalue = dblValue.ToString();
 
                     this.PropDic[key] = strvalue;
                 }
+
+                // 计算绝热指数
+                double cp;
+                double cv;
+                if (double.TryParse(this.PropDic["IsobaricHeatCapacity"], out cp) && double.TryParse(this.PropDic["IsochoricHeatCapacity"], out cv))
+                {
+                    this.PropDic["AdiabaticExponent"] = (cp / cv).ToString();
+                }
+                else
+                {
+                    this.PropDic["AdiabaticExponent"] = "N/A";
+                }
+
                 this.RaisePropertyChanged("PropDic");
             }
         }
@@ -163,6 +186,7 @@ namespace Aqua.Models
             ThermalDiffusivity = 27,
             Prandtl = 28,
             SurfaceTension = 29,
+            AdiabaticExponent = 30,
         }
     }
 }

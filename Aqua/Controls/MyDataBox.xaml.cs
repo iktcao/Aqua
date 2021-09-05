@@ -75,5 +75,11 @@ namespace Aqua.Controls
 
         #endregion
 
+        private void txtValue_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var obj = sender as TextBox;
+            obj.SelectAll();
+            obj.Copy();
+        }
     }
 }
